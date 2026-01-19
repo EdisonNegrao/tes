@@ -1,0 +1,38 @@
+<messaging:emailTemplate subject="Produtos e Preços – {!relatedTo.Name}"
+    recipientType="Contact"
+    relatedToType="Campaign">
+
+    <!-- Corpo texto puro (fallback) -->
+    <messaging:plainTextEmailBody >
+Olá {!recipient.FirstName},
+
+Segue a lista de produtos e preços do Price Book da campanha {!relatedTo.Name}.
+
+Atenciosamente,
+Equipe Comercial
+    </messaging:plainTextEmailBody>
+
+    <!-- Corpo HTML (é o que o Gmail mostra) -->
+    <messaging:htmlEmailBody >
+        <html>
+        <body style="font-family: Arial, sans-serif; font-size: 14px;">
+            <p>Olá {!recipient.FirstName},</p>
+
+            <p>
+                Segue a lista de produtos e preços do Price Book da campanha
+                <b>{!relatedTo.Name}</b>.
+            </p>
+
+            <!-- tabela do price book -->
+            <c:CampaignPricebookTable recordId="{!relatedTo.Id}"
+                recipientRecordId="{!recipient.Id}"/>
+
+            <p style="margin-top:20px;">
+                Atenciosamente,<br/>
+                <b>Equipe Comercial</b><br/>
+                Bosswood Products
+            </p>
+        </body>
+        </html>
+    </messaging:htmlEmailBody>
+</messaging:emailTemplate>
